@@ -1,0 +1,95 @@
+mission_points:
+  - id: 0
+    point:
+      - -3.25803733
+      - 3.52696657
+      - -1.61297643
+    isStop: true
+    conPts:
+      - 0
+  - id: 1
+    point:
+      - -1.11925042
+      - -1.31706536
+      - -0.315400541
+    isStop: false
+    conPts:
+      - 0
+  - id: 2
+    point:
+      - -1.11226618
+      - -1.31648147
+      - -0.318023086
+    isStop: false
+    conPts:
+      - 0
+  - id: 3
+    point:
+      - 16.3588791
+      - -2.14988995
+      - -0.0457034335
+    isStop: false
+    conPts:
+      - 0
+  - id: 4
+    point:
+      - 20.2106514
+      - 9.448349
+      - 1.44946349
+    isStop: false
+    conPts:
+      - 0
+  - id: 5
+    point:
+      - 17.1187706
+      - 28.1166172
+      - 2.56089497
+    isStop: false
+    conPts:
+      - 0
+  - id: 6
+    point:
+      - 3.05153394
+      - 28.6442585
+      - 3.06188488
+    isStop: true
+    conPts:
+      - 0    isStop: false
+    conPts:
+      - 5
+      - 7
+  - id: 7
+    point:
+      - 7.02273703
+      - -68.4021759
+      - -1.55598593
+    isStop: false
+    conPts:
+      - 6
+      - 8
+  - id: 8
+    point:
+      - -4.51502266
+      - -68.9251556
+      - -0.00607138267
+    isStop: true
+    conPts:
+      - 7
+  - id: 9
+    point:
+      - 5.58881998
+      - -4.03598309
+      - -1.59046507
+    isStop: false
+    conPts:
+      - 1
+      - 10
+      - 2
+  - id: 10
+    point:
+      - 0.0372940302
+      - -4.15424442
+      - -0.00646204688
+    isStop: true
+    conPts:
+      - 9

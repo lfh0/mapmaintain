@@ -1,0 +1,12 @@
+robot_state:
+  front_camera_topic : "realsense/d435i/camera"
+  depth_camera_topic : "/camera/depth/image_rect_raw"
+  odom_topic : "global/odometry/imu"
+  depth_range: 40
+  pre_existing_obs_threahlod: 1.3
+
+map_maintain:
+  inflation_radius: 0.0
+  odom_topic: "global/odometry/imu"
+  local_map_size: 1.0
+  map_frame_id: "map"
