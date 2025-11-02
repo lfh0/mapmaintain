@@ -56,3 +56,6 @@ link_directories(
 
 add_executable(read_pcd src/readPCD.cpp)
 target_link_libraries(read_pcd ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+
+add_executable(ransac_ground_node src/groud_ransac.cpp)
+target_link_libraries(ransac_ground_node ${catkin_LIBRARIES} ${PCL_LIBRARIES})

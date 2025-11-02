@@ -12,31 +12,37 @@ int main (int argc, char **argv)
   ros::init (argc, argv, "UandBdetect");
   ros::NodeHandle nh;
   std::string pcd_file_path;
-  nh.getParam("lab/pcd_file_path", pcd_file_path);
-
-  ros::Publisher pcl_pub = nh.advertise<sensor_msgs::PointCloud2> ("pcl_output", 1);
-  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_input(new pcl::PointCloud<pcl::PointXYZ>);
+  std::string pointcloudFrame;
+  std::string readpcd_topic;
+  int meanK;
+  double Thresh;
   pcl::PointCloud<pcl::PointXYZ> cloud_output;
 
-  sensor_msgs::PointCloud2 output;
 
-  pcl::io::loadPCDFile (pcd_file_path, *cloud_input); //修改自己pcd文件所在路径
-  // 滤波操作，将点云中的雷达噪声点过滤一遍
-  // pcl::VoxelGrid<pcl::PointXYZ> voxel_grid;
-  // voxel_grid.setInputCloud(cloud_input);
-  // voxel_grid.setLeafSize(0.1, 0.1, 0.1);
-  // voxel_grid.filter(cloud_output);
-  
-  // 滤波操作，将点云中的雷达噪声点过滤一遍
+  nh.getParam("navi_map/output/readpcd_topic", readpcd_topic);
+  nh.getParam("navi_map/map_dir/pcd_file_path", pcd_file_path);
+  nh.getParam("navi_map/frame/pointcloudFrame", pointcloudFrame);
+  nh.getParam("navi_map/OutlierRemoval/meanK", meanK);
+  nh.getParam("navi_map/OutlierRemoval/Thresh", Thresh);
+
+
+  ros::Publisher pcl_pub = nh.advertise<sensor_msgs::PointCloud2> (readpcd_topic, 1);
+
+  // 加载点云文件
+  pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_input(new pcl::PointCloud<pcl::PointXYZ>);
+  pcl::io::loadPCDFile (pcd_file_path.c_str(), *cloud_input); //修改自己pcd文件所在路径
+
+  // 滤波操作，将点云中的离群雷达噪声点过滤一遍
   pcl::StatisticalOutlierRemoval<pcl::PointXYZ> sor;
   sor.setInputCloud(cloud_input);
-  sor.setMeanK(20);
-  sor.setStddevMulThresh(1.0);
+  sor.setMeanK(meanK);
+  sor.setStddevMulThresh(Thresh);
   sor.filter(cloud_output);
   
   //Convert the cloud to ROS message
+  sensor_msgs::PointCloud2 output;
   pcl::toROSMsg(cloud_output, output);
-  output.header.frame_id = "odom";
+  output.header.frame_id = pointcloudFrame;
 
   ros::Rate loop_rate(10);
   while (ros::ok())

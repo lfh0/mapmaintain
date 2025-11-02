@@ -1,2 +1,15 @@
-lab:
-  pcd_file_path: /home/lfh/bag/TaiCang/map.pcd
+navi_map:
+  map_path:
+    pcd_file_path: /home/lfh/AV/map_maintain/park_navigation/src/navi_map/pcd/taicang.pcd
+    pcd_ground_out_path: /home/lfh/AV/map_maintain/park_navigation/src/navi_map/pcd/taicang_ground_tilt.pcd
+    pcd_non_ground_out_path: /home/lfh/AV/map_maintain/park_navigation/src/navi_map/pcd/taicang_non_ground_tilt.pcd
+
+  frame:
+    mapFrame: map
+    pointcloudFrame: world
+
+  sensor:
+    height: 1.0
+
+
+  

@@ -1,6 +1,6 @@
-image: /home/lfh/AV/map_maintain/park_navigation/src/navi_map/maps/lab.pgm
+image: lab.pgm
 resolution: 0.050000
-origin: [-29.400000, -17.900000, -nan]
+origin: [-34.749998, -21.500000, 0.0]
 negate: 0
 occupied_thresh: 0.65
 free_thresh: 0.196
