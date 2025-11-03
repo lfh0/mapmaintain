@@ -71,6 +71,9 @@ int main(int argc, char** argv)
     sor.setMeanK(MeanK);
     sor.setStddevMulThresh(Thresh);
     sor.filter(*cloud_z);
+    sensor_msgs::PointCloud2 cloud_output_msg;
+    cloud_output_msg.header.frame_id = "map";
+    pcl::toROSMsg(*cloud_z, cloud_output_msg);
 
     // 2) 约束法向量接近 Z 轴，允许一定倾斜角
     pcl::SACSegmentation<pcl::PointXYZ> seg;
@@ -148,6 +151,15 @@ int main(int argc, char** argv)
     pcl::io::savePCDFileBinary(ground_pcd, *ground);
     pcl::io::savePCDFileBinary(nonground_pcd, *nonground);
     ROS_INFO("Saved:\n  %s\n  %s", ground_pcd.c_str(), nonground_pcd.c_str());
+
+    ros::Rate rate(10);
+    while (ros::ok()) {
+        cloud_output_msg.header.frame_id = "map";
+        cloud_output_msg.header.stamp = ros::Time::now();
+        ground_pub.publish(cloud_output_msg);
+        ros::spinOnce();
+        rate.sleep();
+    }
 
     return 0;
 }
